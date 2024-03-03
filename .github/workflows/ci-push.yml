@@ -1,0 +1,15 @@
+name: CI - Push
+on:
+  push:
+
+jobs:
+  format:
+    name: Format
+    uses: ./.github/workflows/format.yml
+    secrets: inherit
+
+  build:
+    name: Build
+    needs: format
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
