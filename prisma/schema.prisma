@@ -1,0 +1,88 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model PrismaMember {
+    id           Int                 @id @default(autoincrement())
+    publicId     Int                 @unique @map("public_id")
+    name         String
+    nickname     String
+    birthDate    DateTime            @map("birth_date")
+    gender       PrismaGender
+    role         PrismaRole
+    applications PrismaApplication[]
+
+    @@map("member")
+}
+
+model PrismaApplication {
+    id         Int              @id @default(autoincrement())
+    member     PrismaMember     @relation(fields: [memberPid], references: [publicId])
+    memberPid  Int              @map("member_pid")
+    week       Int
+    occupation PrismaOccupation
+    topic      PrismaTopic?
+
+    @@map("application")
+}
+
+enum PrismaGender {
+    FEMALE
+    MALE
+
+    @@map("gender")
+}
+
+enum PrismaRole {
+    CREW
+    STUDENT
+
+    @@map("role")
+}
+
+enum PrismaOccupation {
+    CAMP_LEADER
+    WEEK_LEADER
+    DOCTOR
+    PSYCHOLOGIST
+    TEACHER
+    ENGLISH_TEACHER
+    SMALL_TEACHER
+    SQUIRREL
+    SMALL_SQUIRREL
+    BUFE
+    GUEST
+    CAMPER
+
+    @@map("occupation")
+}
+
+enum PrismaTopic {
+    ENGLISH
+    VIDEOGRAPHER
+    GAMER
+    PROGRAMER
+    ROBOTICS
+    DRONE
+    GAMES
+    PHOTOGRAPHER
+    CRAFTSMAN
+    SCIENTIST
+    COOKING
+    ACTOR
+    SPORT
+    DANCER
+    PRINTING_3D
+    BROKER
+    WRITER
+    AI
+    ASTRONOMER
+    DOZEN
+
+    @@map("topic")
+}
