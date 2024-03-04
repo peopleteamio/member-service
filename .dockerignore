@@ -32,4 +32,5 @@ node_modules
 nodemon.json
 
 # Ignore test files
+
 \*_/_.spec.ts
