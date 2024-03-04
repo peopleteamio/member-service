@@ -13,6 +13,9 @@ RUN npm install
 # Copy the source code
 COPY . .
 
+# Generate Prisma Client
+RUN npx prisma generate
+
 # Build the app
 RUN npm run build
 
@@ -28,6 +31,12 @@ COPY package*.json .
 
 # Install dependencies
 RUN npm install --omit=dev
+
+# Copy the prisma schema
+COPY prisma/schema.prisma prisma/schema.prisma
+
+# Generate Prisma Client
+RUN npx prisma generate
 
 # Copy the dist folder from the previous stage
 COPY --from=build /usr/src/app/dist dist
