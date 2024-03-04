@@ -8,8 +8,14 @@ jobs:
     uses: ./.github/workflows/format.yml
     secrets: inherit
 
+  test:
+    name: Test
+    needs: format
+    uses: ./.github/workflows/test.yml
+    secrets: inherit
+
   build:
     name: Build
-    needs: format
+    needs: test
     uses: ./.github/workflows/build.yml
     secrets: inherit
