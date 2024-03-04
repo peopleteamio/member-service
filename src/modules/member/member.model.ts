@@ -1,4 +1,4 @@
-import { Exclude, Expose, Transform } from "class-transformer";
+import { Exclude, Expose } from "class-transformer";
 import { Gender } from "../../shared/enums/gender.enum";
 import { Role } from "../../shared/enums/role.enum";
 import { IMember } from "./member.interface";
