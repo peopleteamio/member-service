@@ -1,9 +1,10 @@
-import { Expose } from "class-transformer";
+import { Exclude, Expose, Transform } from "class-transformer";
 import { Gender } from "../../shared/enums/gender.enum";
 import { Role } from "../../shared/enums/role.enum";
 import { IMember } from "./member.interface";
 
 export class Member implements IMember {
+  @Exclude()
   id!: number;
 
   @Expose({ name: "public_id" })
@@ -19,4 +20,8 @@ export class Member implements IMember {
   gender!: Gender;
 
   role!: Role;
+
+  constructor(data: IMember) {
+    Object.assign(this, data);
+  }
 }
