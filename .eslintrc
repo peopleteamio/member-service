@@ -1,8 +1,10 @@
 {
   "root": true,
+  "parser": "@typescript-eslint/parser",
   "extends": ["prettier"],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "unused-imports"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "unused-imports/no-unused-imports": "error"
   }
 }
