@@ -2,6 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { PrismaClient, PrismaMember } from "@prisma/client";
 import { Member } from "../../modules/member/member.model";
 import { IMember } from "../../modules/member/member.interface";
+import { Gender } from "../enums/gender.enum";
+import { Role } from "../enums/role.enum";
 
 @Injectable()
 export class PrismaService extends PrismaClient {}
@@ -20,8 +22,11 @@ export class DatabaseService {
   }
 
   private static initMember(member: PrismaMember): Member {
-    const newMember = new Member();
-    Object.assign(newMember, member);
-    return newMember;
+    const memberData: IMember = {
+      ...member,
+      gender: Gender[member.gender],
+      role: Role[member.role]
+    };
+    return new Member(memberData);
   }
 }
